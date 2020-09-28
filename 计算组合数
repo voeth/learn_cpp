@@ -1,0 +1,45 @@
+/*
+for example:sum the numbers 2+22+222+2222+22222=?
+*/
+#include <iostream>
+using namespace std;
+int main() {
+	int base, len;
+	int compute(int, int,int,int);
+	cout << "Enter the base integer and length of compute" << endl;
+	cin >> base >> len;
+	int result = base;
+	cout << base << endl;
+	for (int a = 1; a < len; a++) {
+		result += compute(base, 10,a,base);
+    // result += compute(base,len);
+	}
+	cout << "The result is: " << result;
+}
+
+/*
+// 计算将要用于做加法的数，基于用户给的基数和长度算出
+// Loop way
+int compute(int base, int len) {
+	int ten = 10;
+	int result = base;
+	for (int b = 0; b < len; b++) {
+		result += ten * base ;
+		ten *= 10;	// 向更高位数推进
+	}
+	cout << result << endl;
+	return result;
+}
+ */
+
+// Recrusion way
+int compute(int base, int ten,int len,int result) {	
+	if (len != 0) {
+		result = base * ten + result; //先计算好结果才不易乱。
+		// len-- cause stack overflow.Must first minute then use the value
+		result = compute(base, ten *= 10, --len, result);// give value to variable,save computed result.
+		cout << result << endl;
+		return result;
+	} 
+	return result; // return the result and stop call function.
+}
