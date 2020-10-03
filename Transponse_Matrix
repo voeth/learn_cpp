@@ -1,0 +1,41 @@
+/*
+3x3矩阵转置
+*/
+# include <iostream>
+using namespace std;
+
+int main() {
+	// 二维数组下标，第二维长度不可少
+	int m[][3] = { {1,2,3},{4,5,6},{7,8,9} };
+	// 指向数组的引用必须写成 int (&) [3][3],否则被视为以引用为元素的数组
+	//void transpose(int (&)[3][3]);
+	//void print(int (&)[3][3]);
+
+	void transpose(int *);
+	void print(int *);
+	// 指针访问二维数组，将数组首个元素地址传给指针
+	print(&m[0][0]);
+	transpose(&m[0][0]);
+	print(&m[0][0]);
+	return 0;
+}
+void transpose(int *matrix) {
+	int temp;
+	for (int row = 0; row < 3; row++) {
+		for (int col = 0; col < 3; col++) {
+			if (row > col) {
+				// 数组大小3x3 按行排列，从0开始计数，所以每个元素的位置应该是matrix+3*row+col
+				temp = *(matrix + 3 * row + col);
+				*(matrix + 3 * row + col) = *(matrix + 3 * col + row);
+				*(matrix + 3 * col + row) = temp;
+			}	
+		}
+	}
+}
+
+void print(int *matrix) {
+	for (int row = 0; row < 3; row++) {
+		for (int col = 0; col < 3; col++) cout << *(matrix+3*row+col) << " ";
+		cout << endl;
+	}
+}
