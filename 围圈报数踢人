@@ -1,0 +1,33 @@
+/*
+n人围成圈，从1-3报数，报到3的就退出，输入最终留下来的人，他的原始编号。
+*/
+#include <iostream>
+using namespace std;
+int main() {
+	int num, count = 0, order = 0, *p, out = 0;
+	cout << "Enter the number of person" << endl;
+	cin >> num;
+	p = new int[num];
+
+	// 对所有人进行编号
+	for (int i = 0; i < num; i++) *(p + i) = i + 1;
+	// 最终一定只有一个人留下来
+	while (out < num - 1) {
+		
+		// 已经被踢出去的就不能再报数
+		if (*(p + order) != 0) count++;
+		if (count == 3) {
+			*(p + order) = 0;
+			count = 0;
+			out++;
+		}
+		order++;
+		// 开始新一轮报数
+		if (order == num) order = 0;
+	}
+
+	// 如果当前指针指向已经退出的人，就跳过找下一个
+	while (*p == 0) p++;
+	cout << "The last one is:" << *p << endl;
+	return 0;
+}
