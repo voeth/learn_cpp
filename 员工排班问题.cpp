@@ -65,7 +65,7 @@ bool meet(nightShift list[]) {
 			if (list[6] - list[1] == 3)
 				if (list[5] - list[1] == list[2] - list[5])
 					//if (list[5] == 4)
-					if(list[5]==3)
+					if(list[5]==3)// list[5]==Thurday 不成立！枚举元素本质上就是整型
 						return true;
 	return false;
 }
