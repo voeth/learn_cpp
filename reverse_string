@@ -1,0 +1,31 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+void converse(char *str, int len) {
+	int head = 0,tail = len;
+	char temp;
+	while (true) {
+		if (head >= tail) break;
+		temp = *(str + head);
+		*(str + head) = *(str + tail);
+		*(str + tail) = temp;
+		head ++, tail --;
+	}
+}  
+
+
+int main() {
+	string input;
+	cout << "Enter string: " << endl;
+	cin >> input;
+	// 要想读取字符串的每一个字符就应该传字符串的首个字符地址，而不是整个字符串的地址
+	// false: &input;
+	converse(&input[0], input.size() - 1); 
+	cout << input;
+}
+
+
+
+
+
